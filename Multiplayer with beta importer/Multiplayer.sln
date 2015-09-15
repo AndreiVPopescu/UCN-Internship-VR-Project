@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multiplayer.CSharp.Plugins", "Multiplayer.CSharp.Plugins.csproj", "{8F9F7551-EC5B-E9BD-9054-504A2EF7F81B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multiplayer.CSharp", "Multiplayer.CSharp.csproj", "{62D5B265-94AE-2ED9-B9DB-00F3D91A2A33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multiplayer.CSharp.Editor", "Multiplayer.CSharp.Editor.csproj", "{DDFB0DBC-F790-4EBD-CD37-955BC7E296BC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F9F7551-EC5B-E9BD-9054-504A2EF7F81B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F9F7551-EC5B-E9BD-9054-504A2EF7F81B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F9F7551-EC5B-E9BD-9054-504A2EF7F81B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F9F7551-EC5B-E9BD-9054-504A2EF7F81B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62D5B265-94AE-2ED9-B9DB-00F3D91A2A33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62D5B265-94AE-2ED9-B9DB-00F3D91A2A33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62D5B265-94AE-2ED9-B9DB-00F3D91A2A33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62D5B265-94AE-2ED9-B9DB-00F3D91A2A33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDFB0DBC-F790-4EBD-CD37-955BC7E296BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDFB0DBC-F790-4EBD-CD37-955BC7E296BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDFB0DBC-F790-4EBD-CD37-955BC7E296BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDFB0DBC-F790-4EBD-CD37-955BC7E296BC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
