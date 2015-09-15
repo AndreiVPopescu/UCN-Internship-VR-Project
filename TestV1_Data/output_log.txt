@@ -1,0 +1,85 @@
+Initialize engine version: 5.1.3f1 (b0a23b31c3d8)
+[VRDevice] Successfully created device oculus.
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: AMD Radeon(TM) R7 Graphics (ID=0x130c)
+    Vendor:   ATI
+    VRAM:     3024 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Andrei\Desktop\School\SemV\UCN\Internship Project\Internship Gamification\TestV1_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Andrei\Desktop\School\SemV\UCN\Internship Project\Internship Gamification\TestV1_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Andrei\Desktop\School\SemV\UCN\Internship Project\Internship Gamification\TestV1_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Andrei\Desktop\School\SemV\UCN\Internship Project\Internship Gamification\TestV1_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Andrei\Desktop\School\SemV\UCN\Internship Project\Internship Gamification\TestV1_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Andrei\Desktop\School\SemV\UCN\Internship Project\Internship Gamification\TestV1_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Andrei\Desktop\School\SemV\UCN\Internship Project\Internship Gamification\TestV1_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Andrei\Desktop\School\SemV\UCN\Internship Project\Internship Gamification\TestV1_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Andrei\Desktop\School\SemV\UCN\Internship Project\Internship Gamification\TestV1_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Andrei\Desktop\School\SemV\UCN\Internship Project\Internship Gamification\TestV1_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\Andrei\Desktop\School\SemV\UCN\Internship Project\Internship Gamification\TestV1_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading C:\Users\Andrei\Desktop\School\SemV\UCN\Internship Project\Internship Gamification\TestV1_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+Platform assembly: C:\Users\Andrei\Desktop\School\SemV\UCN\Internship Project\Internship Gamification\TestV1_Data\Managed\System.Core.dll (this message is harmless)
+- Completed reload, in  0.341 seconds
+desktop: 1920x1080 60Hz; virtual: 4000x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: C:\Users\Andrei\Desktop\School\SemV\UCN\Internship Project\Internship Gamification\TestV1_Data\Managed\System.dll (this message is harmless)
+[CAPI] LibOVR module is located at C:\WINDOWS\SYSTEM32\LibOVRRT32_0_6.dll
+
+ 
+(Filename:  Line: 46)
+
+Compositor failed to initialize.
+ 
+(Filename:  Line: 48)
+
+Bad config or LibOVR not found. VR disabled.
+ 
+(Filename:  Line: 247)
+
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 10a38 -> priority: 1 
+MatchMakingClient Create :https://mm.unet.unity3d.com/json/reply/CreateMatchRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+JSON Response: [[UnityEngine.Networking.Match.CreateMatchResponse]-success:True-extendedInfo:]-address:52.28.68.38,port:9999,networkId:0x0010000000002E1D,nodeId:0x4A73,usingRelay:True
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Log: connection {1} has been disconnected by timeout; address {::ffff:52.28.68.38:9999}
+aissp: time {586926} lastRecTime {584886} DisTme {2000}, rtt {60} 
+ 
+(Filename:  Line: 1845)
+
+Log: connection {1} has been disconnected by timeout; address {::ffff:52.28.68.38:9999}
+aissp: time {912538} lastRecTime {910045} DisTme {2000}, rtt {54} 
+ 
+(Filename:  Line: 1845)
+
+Joystick connected ("Controller (Xbox 360 Wireless Receiver for Windows)").
+ 
+(Filename:  Line: 1353)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at ButtonStare.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at ButtonStare.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at ButtonStare.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at ButtonStare.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
