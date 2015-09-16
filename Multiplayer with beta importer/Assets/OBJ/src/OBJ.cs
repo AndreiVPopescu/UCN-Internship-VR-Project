@@ -109,8 +109,8 @@ public class OBJ : MonoBehaviour
         }
 
         Build();
-        transform.Rotate(new Vector3(90, 0, 0));
 
+        Debug.Log("-----------------------------------------------------------------------");
 
     }
 
@@ -556,13 +556,25 @@ public class OBJ : MonoBehaviour
                 go.transform.parent = gameObject.transform;
                 go.AddComponent(typeof(MeshFilter));
                 go.AddComponent(typeof(MeshRenderer));
-                go.name = "temp"; ///// go.GetComponent<MeshFilter>().mesh.name.StartsWith("None") || 
+                //MeshCollider collider = new MeshCollider();
+                //collider.sharedMesh = go.GetComponent<Mesh>();
+                //go.AddComponent<MeshCollider>().sharedMesh = null;
+                //go.GetComponent<MeshCollider>().sharedMesh = go.GetComponent<MeshFilter>().mesh;
+                // go.AddComponent<MeshCollider>().sharedMesh = go.GetComponent<MeshFilter>().mesh;
+                go.AddComponent(typeof(MeshCollider));
+                go.GetComponent<MeshCollider>().sharedMesh = go.GetComponent<MeshFilter>().mesh;
+                go.GetComponent<MeshCollider>().convex.Equals(true);
+                go.GetComponent<MeshCollider>().convex.Equals(false);
+                ///// go.GetComponent<MeshFilter>().mesh.name.StartsWith("None") || 
                 //if ( go.GetComponent<MeshRenderer>().material.shader.name.StartsWith("asf") ) { GameObject.Destroy(go); Debug.Log("something"); }
                 //else ms[i] = go;
                 ms[i] = go;
             }
+
+            SetRootPosition();
             DeleteEmptyObjects(ms);
-            buffer.PopulateMeshes(ms, materials);
+            buffer.PopulateMeshes(ms, materials); //doesn't get out of here
+            refreshMeshFilter(ms); 
             //DeleteEmptyObjects(ms);
 
         }
@@ -578,6 +590,21 @@ public class OBJ : MonoBehaviour
                 //GameObject.Destroy(go);
                 Debug.Log("something");
             //}
+        }
+    }
+
+    void SetRootPosition() { //sets root object position and rotation
+        transform.Rotate(new Vector3(270, 0, 0));
+        transform.position = new Vector3(0, 55, 0);
+    }
+
+    public void refreshMeshFilter(GameObject[] mm)
+    {
+        foreach (GameObject go in mm)
+        {
+            go.SetActive(false);
+            go.SetActive(true);
+            Debug.Log("WATT");
         }
     }
 }
