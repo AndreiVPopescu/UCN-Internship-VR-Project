@@ -561,10 +561,10 @@ public class OBJ : MonoBehaviour
                 //go.AddComponent<MeshCollider>().sharedMesh = null;
                 //go.GetComponent<MeshCollider>().sharedMesh = go.GetComponent<MeshFilter>().mesh;
                 // go.AddComponent<MeshCollider>().sharedMesh = go.GetComponent<MeshFilter>().mesh;
-                go.AddComponent(typeof(MeshCollider));
-                go.GetComponent<MeshCollider>().sharedMesh = go.GetComponent<MeshFilter>().mesh;
-                go.GetComponent<MeshCollider>().convex.Equals(true);
-                go.GetComponent<MeshCollider>().convex.Equals(false);
+                //go.AddComponent(typeof(MeshCollider));
+                //go.GetComponent<MeshCollider>().sharedMesh = go.GetComponent<MeshFilter>().mesh;
+                //go.GetComponent<MeshCollider>().convex.Equals(true);
+                //go.GetComponent<MeshCollider>().convex.Equals(false);
                 ///// go.GetComponent<MeshFilter>().mesh.name.StartsWith("None") || 
                 //if ( go.GetComponent<MeshRenderer>().material.shader.name.StartsWith("asf") ) { GameObject.Destroy(go); Debug.Log("something"); }
                 //else ms[i] = go;
