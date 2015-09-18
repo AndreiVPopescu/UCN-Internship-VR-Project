@@ -151,7 +151,7 @@ public class GeometryBuffer {
 				}
 				tvertices[k] = vertices[fi.vi];
 				if(hasUVs) tuvs[k] = uvs[fi.vu];
-                if (hasNormals && fi.vn >= 0) { Debug.Log(k + " = " + tnormals.Length + " ! " + fi.vn + " = " + normals.Count); tnormals[k] = normals[fi.vn]; }
+                if (hasNormals && fi.vn >= 0) tnormals[k] = normals[fi.vn];
 
 				k++;
 			}
