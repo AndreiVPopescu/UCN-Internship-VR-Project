@@ -45,8 +45,7 @@ public class OBJ : MonoBehaviour
     void Start()
     {
         buffer = new GeometryBuffer();
-        objPath = "file:///" +Application.dataPath + "/tempobj/build1/Small.obj";
-        Debug.Log(Application.dataPath);
+        objPath = "file:///" +Application.dataPath + "/tempobj/build1/Small.obj";      
         StartCoroutine(Load(objPath));
 
         //StartCoroutine(Load(Application.dataPath + "/tempobj/build1/Small.obj"));
@@ -62,12 +61,13 @@ public class OBJ : MonoBehaviour
 
         SetGeometryData(loader.text); //
 
+        
+
         if (hasMaterials)
         {
-            loader = new WWW(basepath + mtllib);
-            Debug.Log("base path = " + basepath);
-            Debug.Log("MTL path = " + (basepath + mtllib));
+            loader = new WWW(basepath + mtllib);           
             yield return loader;
+
             if (loader.error != null)
             {
                 Debug.LogError(loader.error);
@@ -110,7 +110,7 @@ public class OBJ : MonoBehaviour
 
         Build();
 
-        Debug.Log("-----------------------------------------------------------------------");
+        
 
     }
 
@@ -191,7 +191,7 @@ public class OBJ : MonoBehaviour
         }
     }
 
-    private void SetGeometryData(string data)
+    private void SetGeometryData(string data) // runs 2
     {
         string[] lines = data.Split("\n".ToCharArray());
         Regex regexWhitespaces = new Regex(@"\s+");
@@ -202,7 +202,7 @@ public class OBJ : MonoBehaviour
             string l = lines[i].Trim();
 
             if (l.IndexOf("#") != -1)
-            { // comment line
+            { 
                 continue;
             }
             string[] p = regexWhitespaces.Split(l);
@@ -260,11 +260,11 @@ public class OBJ : MonoBehaviour
                     }
                     break;
                 case MTL:
-                    buffer.PushObject("test1");
+                    buffer.PushObject(p[1].Trim());
                     mtllib = l.Substring(p[0].Length + 1).Trim();
                     break;
                 case UML:
-                    buffer.PushObject("test" + counter); counter++;
+                 buffer.PushObject(p[1].Trim()); counter++;
                     buffer.PushMaterialName(p[1].Trim());
                     break;
             }
@@ -343,7 +343,7 @@ public class OBJ : MonoBehaviour
             switch (p[0])
             {
                 case NML:
-                    buffer.PushObject("test");
+                   // buffer.PushObject("test");
                     current = new MaterialData();
                     current.name = p[1].Trim();
                     materialData.Add(current);
@@ -375,7 +375,7 @@ public class OBJ : MonoBehaviour
                     current.illumType = ci(p[1]);
                     break;
                 default:
-                    Debug.Log("this line was not processed :" + l);
+                 
                     break;
             }
         }
@@ -513,10 +513,10 @@ public class OBJ : MonoBehaviour
         return new Color(cf(p[1]), cf(p[2]), cf(p[3]));
     }
 
-    private void Build()
+    private void Build() //3
     {
         Dictionary<string, Material> materials = new Dictionary<string, Material>();
-
+        Debug.Log(buffer.numObjects);
         if (hasMaterials)
         {
             foreach (MaterialData md in materialData)
@@ -570,7 +570,7 @@ public class OBJ : MonoBehaviour
                 //else ms[i] = go;
                 ms[i] = go;
             }
-
+            
             SetRootPosition();
             DeleteEmptyObjects(ms);
             buffer.PopulateMeshes(ms, materials); //doesn't get out of here

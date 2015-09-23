@@ -130,6 +130,14 @@ public class GeometryBuffer {
     
 
 	public void PopulateMeshes(GameObject[] gs, Dictionary<string, Material> mats) {
+
+
+        Debug.Log(gs.Length);
+
+        foreach (ObjectData item in objects)
+        {
+            Debug.Log(item.allFaces.Count);
+        }
 		if(gs.Length != numObjects) return; // Should not happen unless obj file is corrupt...
 		//Debug.Log("PopulateMeshes GameObjects count:"+gs.Length);
 		for(int i = 0; i < gs.Length; i++) {
