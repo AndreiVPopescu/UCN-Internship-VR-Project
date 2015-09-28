@@ -16,12 +16,14 @@ namespace UnityEngine.Networking
         public Button startMatchMakerButton;
         public Button createInternetMatchButton;
         public Button findInternetMatchButton;
+        public Button returnStartButton;
         public Transform canvasPanelTransform;
         private Match.MatchDesc[] test= new Match.MatchDesc[100];
         private bool ok = true;
         public Sprite image;
         private List<GameObject> mmButtons = new List<GameObject>();
         public GameObject playerToDelete;
+        public bool isHost;
         [SerializeField] public bool showGUI = true;
 		[SerializeField] public int offsetX;
 		[SerializeField] public int offsetY;
@@ -45,7 +47,8 @@ namespace UnityEngine.Networking
 				if (Input.GetKeyDown(KeyCode.X))
 				{
 					manager.StopHost();
-				}
+                    GameObject.Destroy(gameObject);
+                }
 			}
 		}
 
@@ -93,12 +96,14 @@ namespace UnityEngine.Networking
             joinButton.gameObject.SetActive(false);
             startMatchMakerButton.gameObject.SetActive(false);
             ok = true;
+            isHost = true;
         }
 
         public void startClient()
         {
             manager.StartClient();
             ok = true;
+            isHost = false;
         }
 
         public void startServer()
@@ -113,6 +118,18 @@ namespace UnityEngine.Networking
             startHostButton.gameObject.SetActive(false);
             joinButton.gameObject.SetActive(false);
             ok = false;
+            returnStartButton.gameObject.SetActive(true);
+        }
+
+        public void returnStart()
+        {
+            returnStartButton.gameObject.SetActive(false);
+            manager.StopMatchMaker();
+            startMatchMakerButton.gameObject.SetActive(true);
+            startHostButton.gameObject.SetActive(true);
+            joinButton.gameObject.SetActive(true);
+            findInternetMatchButton.gameObject.SetActive(false);
+            createInternetMatchButton.gameObject.SetActive(false);
         }
 
         public void createInternetMatch()
@@ -123,6 +140,7 @@ namespace UnityEngine.Networking
             startHostButton.gameObject.SetActive(false);
             findInternetMatchButton.gameObject.SetActive(false);
             ok = true;
+            isHost = true;
         }
 
         public void findInternetMatch()
@@ -139,6 +157,7 @@ namespace UnityEngine.Networking
             manager.matchName = match.name;
             manager.matchSize = (uint)match.currentSize;
             manager.matchMaker.JoinMatch(match.networkId, "", manager.OnMatchJoined);
+            isHost = false;
         }
 
         public void ready()
@@ -204,6 +223,7 @@ namespace UnityEngine.Networking
 				if (GUI.Button(new Rect(xpos, ypos, 200, 20), "Stop (X)"))
 				{
 					manager.StopHost();
+                    GameObject.Destroy(gameObject);
 				}
 				ypos += spacing;
                 foreach (GameObject obj in mmButtons)
@@ -288,12 +308,6 @@ namespace UnityEngine.Networking
 					ypos += spacing;
 
 					GUI.Label(new Rect(xpos, ypos, 300, 20), "MM Uri: " + manager.matchMaker.baseUri);
-					ypos += spacing;
-
-					if (GUI.Button(new Rect(xpos, ypos, 200, 20), "Disable Match Maker"))
-					{
-						manager.StopMatchMaker();
-					}
 					ypos += spacing;
 				}
 			}
