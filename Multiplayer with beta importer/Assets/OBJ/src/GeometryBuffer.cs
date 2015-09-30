@@ -132,7 +132,7 @@ public class GeometryBuffer {
 	public void PopulateMeshes(GameObject[] gs, Dictionary<string, Material> mats) {
 
 
-        Debug.Log(gs.Length);
+        //Debug.Log(gs.Length);
 
         foreach (ObjectData item in objects)
         {
@@ -157,15 +157,39 @@ public class GeometryBuffer {
 					Debug.Log("maximum vertex number for a mesh exceeded for object:"  + gs[i].name);
 					break;
 				}
+               
 				tvertices[k] = vertices[fi.vi];
 				if(hasUVs) tuvs[k] = uvs[fi.vu];
-                if (hasNormals && fi.vn >= 0) tnormals[k] = normals[fi.vn];
 
+
+               
+
+                if (fi.vn < normals.Capacity)
+                {
+
+                    if (hasNormals && fi.vn >= 0) tnormals[k] = normals[fi.vn];
+                }
+                else {
+
+                    if (hasNormals && fi.vn >= 0) tnormals[k] = normals[k];
+                    
+                }
 				k++;
 			}
 		
 			Mesh m = (gs[i].GetComponent(typeof(MeshFilter)) as MeshFilter).mesh;
-			m.vertices = tvertices;
+            if (tvertices.Length < 60000)
+            {
+                m.vertices = tvertices;
+            }
+            else {
+                Vector3[] newVec = new Vector3[60000];
+                for (int index = 0; index < 60000; index++)
+                {
+                    newVec[index] = tvertices[index];
+                }
+                m.vertices = newVec;
+            }
 			if(hasUVs) m.uv = tuvs;
 			if(objectHasNormals) m.normals = tnormals;
 
@@ -188,9 +212,21 @@ public class GeometryBuffer {
 				}
 				int[] triangles = new int[gd.faces.Count];
 				for(int j = 0; j < triangles.Length; j++) triangles[j] = j;
-				
-				m.triangles = triangles;
-				
+
+                if (triangles.Length < 60000)
+                {
+                    m.triangles = triangles;
+                }
+                else {
+                    int[] newVec = new int[60000];
+                    for (int index = 0; index < 60000; index++)
+                    {
+                        
+                        newVec[index] = triangles[index];
+                    }
+                    m.triangles = newVec;
+                
+                }
 			} else {
 				int gl = od.groups.Count;
 				Material[] materials = new Material[gl];

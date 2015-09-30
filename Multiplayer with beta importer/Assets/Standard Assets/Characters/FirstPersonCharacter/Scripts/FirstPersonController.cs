@@ -243,7 +243,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void RotateView()
         {
             joysticks = Input.GetJoystickNames();
-            if (Input.GetJoystickNames()[0]=="")
+            if (Input.GetJoystickNames().Length==0 || Input.GetJoystickNames()[0]=="")
             {
                 m_MouseLook.LookRotation(transform, m_Camera.transform);
             }
