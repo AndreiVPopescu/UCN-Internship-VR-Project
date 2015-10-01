@@ -45,7 +45,7 @@ public class OBJ : MonoBehaviour
     void Start()
     {
         buffer = new GeometryBuffer();
-        objPath = "file:///" +Application.dataPath + "/tempobj/build1/PreMedium.obj";      
+        objPath = "file:///" +Application.dataPath + "/tempobj/build1/Small.obj";      
         StartCoroutine(Load(objPath));
 
         //StartCoroutine(Load(Application.dataPath + "/tempobj/build1/Small.obj"));

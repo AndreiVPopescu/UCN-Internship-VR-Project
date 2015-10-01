@@ -226,6 +226,7 @@ namespace UnityEngine.Networking
                     GameObject.Destroy(gameObject);
 				}
 				ypos += spacing;
+                if (Application.loadedLevel==0)
                 foreach (GameObject obj in mmButtons)
                 {
                     obj.SetActive(false);
