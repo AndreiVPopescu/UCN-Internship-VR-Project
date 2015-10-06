@@ -24,6 +24,10 @@ public class Player_NetworkSetup : NetworkBehaviour
             crosshair.SetActive(true);
             admin.enabled = true;
         }
-        GameObject.FindGameObjectWithTag("Import").GetComponent<Loading>().addPlayer(gameObject);
+        Loading go = GameObject.FindGameObjectWithTag("Import").GetComponent<Loading>();
+        if (go.enabled)
+        {
+            go.addPlayer(gameObject);
+        }
     }
 }

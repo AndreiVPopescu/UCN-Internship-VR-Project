@@ -24,6 +24,7 @@ public class Loading : MonoBehaviour
             {
                 listOfPlayers[i].SetActive(true);
             }
+            this.enabled = false;
         }
 	}
 
