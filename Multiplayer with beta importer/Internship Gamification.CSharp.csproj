@@ -80,6 +80,7 @@
     <Compile Include="Assets\OBJ\src\OBJ.cs" />
     <Compile Include="Assets\Scripts\Administrator.cs" />
     <Compile Include="Assets\Scripts\ButtonStare.cs" />
+    <Compile Include="Assets\Scripts\Loading.cs" />
     <Compile Include="Assets\Scripts\NetworkManagerHUD.cs" />
     <Compile Include="Assets\Scripts\Player_NetworkSetup.cs" />
     <Compile Include="Assets\Scripts\dontDestroy.cs" />

@@ -30,8 +30,8 @@ public class Administrator : NetworkBehaviour {
     [ClientRpc]
     void RpcOpenDoor(Vector3 pos1, Vector3 pos2)
     {
-        ray.origin = crosshairNear.transform.position;
-        ray.direction = (crosshairFar.transform.position - crosshairNear.transform.position);
+        ray.origin = pos1;
+        ray.direction = pos2;
         if (Physics.Raycast(ray, out hit, 100))
         {
             hitgo = hit.transform.gameObject;

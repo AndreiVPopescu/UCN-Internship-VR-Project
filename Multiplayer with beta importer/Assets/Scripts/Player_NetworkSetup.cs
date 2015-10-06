@@ -10,6 +10,7 @@ public class Player_NetworkSetup : NetworkBehaviour
     AudioListener audioListener;
     [SerializeField]
     Administrator admin;
+    public GameObject loading;
     public GameObject crosshair;
 	// Use this for initialization
 	void Start ()
@@ -21,6 +22,8 @@ public class Player_NetworkSetup : NetworkBehaviour
             FPSCharacterCam.enabled = true;
             audioListener.enabled = true;
             crosshair.SetActive(true);
+            admin.enabled = true;
         }
-	}
+        GameObject.FindGameObjectWithTag("Import").GetComponent<Loading>().addPlayer(gameObject);
+    }
 }
