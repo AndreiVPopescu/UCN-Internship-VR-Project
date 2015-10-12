@@ -166,13 +166,22 @@ public class GeometryBuffer {
 
                 if (fi.vn < normals.Capacity)
                 {
-
+                    try
+                    {
                     if (hasNormals && fi.vn >= 0) tnormals[k] = normals[fi.vn];
+                    }
+                    catch
+                    {
+
+                        Debug.Log("Out of index");
+                    }      
+
                 }
                 else {
-
-                    if (hasNormals && fi.vn >= 0) tnormals[k] = normals[k];
                     
+                        if (hasNormals && fi.vn >= 0) tnormals[k] = normals[k];
+                    
+                                
                 }
 				k++;
 			}

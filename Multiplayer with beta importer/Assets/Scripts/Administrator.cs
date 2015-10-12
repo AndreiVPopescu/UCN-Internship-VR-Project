@@ -9,6 +9,7 @@ public class Administrator : NetworkBehaviour {
     private Ray ray;
     private GameObject hitgo;
     public bool admin;
+    
     // Use this for initialization
     void Start ()
     {
@@ -37,9 +38,23 @@ public class Administrator : NetworkBehaviour {
             hitgo = hit.transform.gameObject;
             hitgo.transform.SetParent(null);
             hitgo.AddComponent<NetworkTransform>();
-            Vector3 pos = hitgo.transform.localPosition;
-            hitgo.transform.RotateAround(pos, hitgo.transform.up, 90);
+           // Vector3 pos = hitgo.transform.GetComponent<Collider>().bounds.center;// - new Vector3((hitgo.transform.GetComponent<MeshFilter>().mesh.bounds.size.x), hitgo.transform.GetComponent<Collider>().bounds.size.y, hitgo.transform.GetComponent<Collider>().bounds.size.z);
+           // hitgo.transform.position = new Vector3(hitgo.transform.position.x, hitgo.transform.position.y, hitgo.transform.position.z + hitgo.transform.GetComponent<MeshFilter>().mesh.bounds.size.z);
+           // hitgo.transform.RotateAround(pos, hitgo.transform.right, 90);
+            hitgo.gameObject.SetActive(false);
+            StartCoroutine(CloseDoor(hitgo.transform));
+            
         }
         Debug.DrawRay(ray.origin, ray.direction * 100, Color.black, 30);
+    }
+
+    IEnumerator CloseDoor(Transform t)
+    {
+        Debug.Log("Close before");
+        yield return new WaitForSeconds(10f);
+        Debug.Log("Close after");
+        t.gameObject.SetActive(true);
+
+
     }
 }
