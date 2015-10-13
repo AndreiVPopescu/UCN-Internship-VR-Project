@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class Administrator : NetworkBehaviour {
     public GameObject crosshairNear;
@@ -21,9 +22,13 @@ public class Administrator : NetworkBehaviour {
     {
         if (admin)
         {
-            if (Input.GetKeyDown("joystick 1 button 0") || Input.GetKeyDown(KeyCode.P))
+            if (CrossPlatformInputManager.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.P))
             {
                 RpcOpenDoor(crosshairNear.transform.position, crosshairFar.transform.position - crosshairNear.transform.position);
+            }
+            if (CrossPlatformInputManager.GetButtonDown("Fire2"))
+            {
+                RpcHideObject(crosshairNear.transform.position, crosshairFar.transform.position - crosshairNear.transform.position);
             }
         }
     }
@@ -36,14 +41,30 @@ public class Administrator : NetworkBehaviour {
         if (Physics.Raycast(ray, out hit, 100))
         {
             hitgo = hit.transform.gameObject;
-            hitgo.transform.SetParent(null);
-            hitgo.AddComponent<NetworkTransform>();
-           // Vector3 pos = hitgo.transform.GetComponent<Collider>().bounds.center;// - new Vector3((hitgo.transform.GetComponent<MeshFilter>().mesh.bounds.size.x), hitgo.transform.GetComponent<Collider>().bounds.size.y, hitgo.transform.GetComponent<Collider>().bounds.size.z);
-           // hitgo.transform.position = new Vector3(hitgo.transform.position.x, hitgo.transform.position.y, hitgo.transform.position.z + hitgo.transform.GetComponent<MeshFilter>().mesh.bounds.size.z);
-           // hitgo.transform.RotateAround(pos, hitgo.transform.right, 90);
-            hitgo.gameObject.SetActive(false);
-            StartCoroutine(CloseDoor(hitgo.transform));
-            
+            //hitgo.transform.SetParent(null);
+            if (hitgo.tag == "Model")
+            {
+                hitgo.gameObject.SetActive(false);
+                StartCoroutine(CloseDoor(hitgo.transform));
+            }
+        }
+        Debug.DrawRay(ray.origin, ray.direction * 100, Color.black, 30);
+    }
+
+    [ClientRpc]
+    void RpcHideObject(Vector3 pos1, Vector3 pos2)
+    {
+        ray.origin = pos1;
+        ray.direction = pos2;
+        if (Physics.Raycast(ray, out hit, 100))
+        {
+            hitgo = hit.transform.gameObject;
+            //hitgo.transform.SetParent(null);
+            if (hitgo.tag == "Model")
+            {
+                hitgo.GetComponentInChildren<MeshRenderer>().enabled = false;
+                StartCoroutine(MakeTransparent(hitgo.transform));
+            }
         }
         Debug.DrawRay(ray.origin, ray.direction * 100, Color.black, 30);
     }
@@ -54,7 +75,11 @@ public class Administrator : NetworkBehaviour {
         yield return new WaitForSeconds(10f);
         Debug.Log("Close after");
         t.gameObject.SetActive(true);
+    }
 
-
+    IEnumerator MakeTransparent(Transform t)
+    {
+        yield return new WaitForSeconds(10f);
+        t.gameObject.GetComponentInChildren<MeshRenderer>().enabled = true;
     }
 }
