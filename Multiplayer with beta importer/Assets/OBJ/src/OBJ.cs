@@ -10,7 +10,6 @@ public class OBJ : MonoBehaviour
 {
 
     public string objPath;
-    public string objFolderPath;
     public int counter = 0;
 
     /* OBJ file tags */
@@ -46,23 +45,10 @@ public class OBJ : MonoBehaviour
     void Start()
     {
         buffer = new GeometryBuffer();
-        objFolderPath = Application.dataPath + "/OBJ";
-
-        objPath = "file:///" + Application.dataPath + "/OBJ/Small.obj";
-
-        DirectoryInfo dir = new DirectoryInfo(objFolderPath);
-        FileInfo[] fileinfo = dir.GetFiles("*.obj");
-
-        String filenames = fileinfo[0].ToString();
-        filenames = filenames.Replace('\u005c', '/');
-
-        //Debug.Log("Opening " + fileinfo[0]);
-        // if (fileinfo.Length  == 0) Debug.Log("No objects found"); //what to do if there are no obj in the OBJ folder
-        //if (fileinfo.Length > 1) Debug.Log("More than 1 obj file found.."); //what to do if there are more than 1 obj
-
-        objPath = "file:///" + Application.dataPath + "/OBJ/" + filenames;
+        objPath = "file:///" +Application.dataPath + "/tempobj/build1/Small.obj";      
         StartCoroutine(Load(objPath));
 
+        //StartCoroutine(Load(Application.dataPath + "/tempobj/build1/Small.obj"));
     }
 
     public IEnumerator Load(string path)
@@ -570,7 +556,6 @@ public class OBJ : MonoBehaviour
                 go.transform.parent = gameObject.transform;
                 go.AddComponent(typeof(MeshFilter));
                 go.AddComponent(typeof(MeshRenderer));
-                go.tag = "Model";
                 //MeshCollider collider = new MeshCollider();
                 //collider.sharedMesh = go.GetComponent<Mesh>();
                 //go.AddComponent<MeshCollider>().sharedMesh = null;

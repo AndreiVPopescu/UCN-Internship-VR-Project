@@ -44,8 +44,13 @@ public class Administrator : NetworkBehaviour {
             //hitgo.transform.SetParent(null);
             if (hitgo.tag == "Model")
             {
-                hitgo.gameObject.SetActive(false);
+                hitgo.SetActive(false);
                 StartCoroutine(CloseDoor(hitgo.transform));
+            }
+            else if (hitgo.tag == "Player")
+            {
+                hitgo.GetComponent<CharacterController>().enabled = false;
+                StartCoroutine(LockPlayer(hitgo.transform));
             }
         }
         Debug.DrawRay(ray.origin, ray.direction * 100, Color.black, 30);
@@ -81,5 +86,11 @@ public class Administrator : NetworkBehaviour {
     {
         yield return new WaitForSeconds(10f);
         t.gameObject.GetComponentInChildren<MeshRenderer>().enabled = true;
+    }
+
+    IEnumerator LockPlayer(Transform t)
+    {
+        yield return new WaitForSeconds(10f);
+        t.gameObject.GetComponent<CharacterController>().enabled = true;
     }
 }
