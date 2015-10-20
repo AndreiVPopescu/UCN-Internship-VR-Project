@@ -11,7 +11,7 @@ public class PlayerName : NetworkBehaviour {
 
     public override void OnStartLocalPlayer()
     {
-        //GetNetIdentity();
+        GetNetIdentity();
         SetIdentity();
     }
 	// Use this for initialization
@@ -27,17 +27,17 @@ public class PlayerName : NetworkBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (myText.text == "New Text")
+        if (myText.text == "New Text" || myText.text=="")
         {
             SetIdentity();
         }
 	}
 
-    //[Client]
-    //void GetNetIdentity()
-    //{
-    //    CmdTellServerMyName(MakeName());
-    //}
+    [Client]
+    void GetNetIdentity()
+    {
+        CmdTellServerMyName(MakeName());
+    }
 
     string MakeName()
     {
@@ -54,9 +54,9 @@ public class PlayerName : NetworkBehaviour {
         myText.text = PlayerUniqueName;
     }
 
-    //[Command]
-    //void CmdTellServerMyName(string name)
-    //{
-    //    PlayerUniqueName = name;
-    //}
+    [Command]
+    void CmdTellServerMyName(string name)
+    {
+        PlayerUniqueName = name;
+    }
 }

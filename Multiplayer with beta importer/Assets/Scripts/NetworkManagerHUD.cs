@@ -11,7 +11,6 @@ namespace UnityEngine.Networking
 	{
 		public NetworkManager manager;
         public Button startHostButton;
-        public Button startButton;
         public Button joinButton;
         public Button startMatchMakerButton;
         public Button createInternetMatchButton;
@@ -34,6 +33,7 @@ namespace UnityEngine.Networking
 
 		void Awake()
 		{
+            GameObject.FindGameObjectWithTag("Name").GetComponent<Text>().text = "Your name: " + System.Environment.MachineName;
 			manager = GetComponent<NetworkManager>();
             DontDestroyOnLoad(transform.gameObject);
         }
@@ -169,7 +169,6 @@ namespace UnityEngine.Networking
             {
                 ClientScene.AddPlayer(0);
             }
-            startButton.gameObject.SetActive(false);
         }
         
 		void OnGUI()
@@ -209,13 +208,6 @@ namespace UnityEngine.Networking
 					GUI.Label(new Rect(xpos, ypos, 300, 20), "Client: address=" + manager.networkAddress + " port=" + manager.networkPort);
 					ypos += spacing;
 				}
-			}
-
-			if (NetworkClient.active && !ClientScene.ready)
-			{
-                if (startButton!=null)
-                startButton.gameObject.SetActive(true);
-				ypos += spacing;
 			}
 
 			if (NetworkServer.active || NetworkClient.active)
