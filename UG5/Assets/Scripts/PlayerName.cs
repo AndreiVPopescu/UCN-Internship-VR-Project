@@ -21,7 +21,7 @@ public class PlayerName : NetworkBehaviour {
 
     void Awake()
     {
-        myText = GetComponentInChildren<Text>();
+        myText = GameObject.FindGameObjectWithTag("Name").GetComponent<Text>();
     }
 
 	// Update is called once per frame
@@ -41,7 +41,7 @@ public class PlayerName : NetworkBehaviour {
 
     string MakeName()
     {
-        return System.Environment.MachineName;
+        return GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManagerHUD>().name;
     }
     
     void SetIdentity()

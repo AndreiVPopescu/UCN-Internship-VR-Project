@@ -23,6 +23,7 @@ namespace UnityEngine.Networking
         private List<GameObject> mmButtons = new List<GameObject>();
         public GameObject playerToDelete;
         public bool isHost;
+        public string name;
         [SerializeField] public bool showGUI = true;
 		[SerializeField] public int offsetX;
 		[SerializeField] public int offsetY;
@@ -33,9 +34,14 @@ namespace UnityEngine.Networking
 
 		void Awake()
 		{
-            GameObject.FindGameObjectWithTag("Name").GetComponent<Text>().text = "Your name: " + System.Environment.MachineName;
+            GameObject.FindGameObjectWithTag("Name").GetComponent<Text>().text = System.Environment.MachineName;
 			manager = GetComponent<NetworkManager>();
             DontDestroyOnLoad(transform.gameObject);
+        }
+
+        public void setName()
+        {
+            name = GameObject.FindGameObjectWithTag("Name").GetComponent<Text>().text;
         }
 
 		void Update()
