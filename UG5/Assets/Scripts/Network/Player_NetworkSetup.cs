@@ -10,6 +10,8 @@ public class Player_NetworkSetup : NetworkBehaviour
     AudioListener audioListener;
     [SerializeField]
     Administrator admin;
+    public GameObject cyl;
+    public GameObject bar;
     public GameObject loading;
     public GameObject crosshair;
 	// Use this for initialization
@@ -23,6 +25,8 @@ public class Player_NetworkSetup : NetworkBehaviour
             audioListener.enabled = true;
             crosshair.SetActive(true);
             admin.enabled = true;
+            cyl.SetActive(false);
+            bar.SetActive(false);
         }
         Loading go = GameObject.FindGameObjectWithTag("Import").GetComponent<Loading>();
         if (go.enabled)

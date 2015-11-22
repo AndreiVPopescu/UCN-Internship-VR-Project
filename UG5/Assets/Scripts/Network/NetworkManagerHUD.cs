@@ -24,6 +24,7 @@ namespace UnityEngine.Networking
         public GameObject playerToDelete;
         public bool isHost;
         public string name;
+        private CharacterController chr;
         [SerializeField] public bool showGUI = true;
 		[SerializeField] public int offsetX;
 		[SerializeField] public int offsetY;
@@ -272,7 +273,7 @@ namespace UnityEngine.Networking
                                 }
                                 for (int j = 0; j < i; j++)
                                 {
-                                    mmButtons.Add(CreateButton(new Vector3(20, (float)4.5 - j, (float)-157.8), new Vector2(20, 15), test[j], test[j].name));
+                                    mmButtons.Add(CreateButton(new Vector3(20, (float)4.5 - j*4, (float)-157.82), new Vector2(20, 15), test[j], test[j].name));
                                     print(test[j].networkId);
                                 }
                             }

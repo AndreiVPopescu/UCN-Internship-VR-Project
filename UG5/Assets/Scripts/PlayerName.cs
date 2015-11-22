@@ -2,12 +2,16 @@
 using System.Collections;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using System;
 
 public class PlayerName : NetworkBehaviour {
-
+    [SerializeField]
+    public GameObject mat;
     [SyncVar]
     public string PlayerUniqueName;
-    private Text myText;
+    //private Text myText;
+    [SerializeField] public Text myText;
+    public float r;
 
     public override void OnStartLocalPlayer()
     {
@@ -21,7 +25,7 @@ public class PlayerName : NetworkBehaviour {
 
     void Awake()
     {
-        myText = GameObject.FindGameObjectWithTag("Name").GetComponent<Text>();
+        //myText = gameObject.GetComponentInChildren
     }
 
 	// Update is called once per frame
@@ -36,14 +40,17 @@ public class PlayerName : NetworkBehaviour {
     [Client]
     void GetNetIdentity()
     {
-        CmdTellServerMyName(MakeName());
+        if (isLocalPlayer)
+        {
+            CmdTellServerMyName(MakeName());
+        }
     }
 
     string MakeName()
     {
         return GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManagerHUD>().name;
     }
-    
+
     void SetIdentity()
     {
         if (isLocalPlayer)
@@ -52,6 +59,11 @@ public class PlayerName : NetworkBehaviour {
         }
 
         myText.text = PlayerUniqueName;
+        string Uname = PlayerUniqueName.ToUpper();
+        r = (Convert.ToInt32(Uname[0]) - 64) * 9/100;
+        float g = (Convert.ToInt32(Uname[1]) - 64) * 9/100;
+        float b = (Convert.ToInt32(Uname[2]) - 64) * 9/100;
+        mat.GetComponent<MeshRenderer>().material.color = new Color(r,g,b);
     }
 
     [Command]

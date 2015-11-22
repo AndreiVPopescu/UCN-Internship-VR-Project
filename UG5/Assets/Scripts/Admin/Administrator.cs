@@ -9,12 +9,13 @@ public class Administrator : NetworkBehaviour {
     private RaycastHit hit;
     private Ray ray;
     private GameObject hitgo;
-    public bool admin;
+    public bool admin=true;
     
     // Use this for initialization
     void Start ()
     {
-        admin = GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManagerHUD>().isHost;
+        admin = true;
+        //admin = GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManagerHUD>().isHost;
     }
 	
 	// Update is called once per frame
@@ -33,7 +34,7 @@ public class Administrator : NetworkBehaviour {
         }
     }
 
-    [ClientRpc]
+    //[ClientRpc]
     void RpcOpenDoor(Vector3 pos1, Vector3 pos2)
     {
         ray.origin = pos1;
@@ -56,7 +57,7 @@ public class Administrator : NetworkBehaviour {
         Debug.DrawRay(ray.origin, ray.direction * 100, Color.black, 30);
     }
 
-    [ClientRpc]
+    //[ClientRpc]
     void RpcHideObject(Vector3 pos1, Vector3 pos2)
     {
         ray.origin = pos1;

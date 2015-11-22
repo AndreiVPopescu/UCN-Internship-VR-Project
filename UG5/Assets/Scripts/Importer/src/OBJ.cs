@@ -64,6 +64,7 @@ public class OBJ : MonoBehaviour
 
         //objPath = "file:///" + Application.dataPath + "/OBJ/" + filenames;
         objPath = "file:///" + filenames;
+        //objPath = "file:///" + objFolderPath +"/"+ filenames;
         Debug.Log("How it is: " + objPath);
         StartCoroutine(Load(objPath));
 
@@ -590,7 +591,7 @@ public class OBJ : MonoBehaviour
                 ms[i] = go;
             }
             
-            SetRootPosition();
+            //SetRootPosition();
             DeleteEmptyObjects(ms);
             buffer.PopulateMeshes(ms, materials); //doesn't get out of here
             refreshMeshFilter(ms); 
