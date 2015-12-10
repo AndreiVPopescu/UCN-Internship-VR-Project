@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\Importer\src\OBJ.cs" />
     <Compile Include="Assets\Scripts\Loading.cs" />
     <Compile Include="Assets\Scripts\Minimap.cs" />
+    <Compile Include="Assets\Scripts\Network\Chat.cs" />
     <Compile Include="Assets\Scripts\Network\NetworkManagerHUD.cs" />
     <Compile Include="Assets\Scripts\Network\Player_NetworkSetup.cs" />
     <Compile Include="Assets\Scripts\OptionsMenu.cs" />

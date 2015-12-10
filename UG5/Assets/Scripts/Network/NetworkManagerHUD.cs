@@ -4,6 +4,7 @@ namespace UnityEngine.Networking
 {
     using UnityEngine.UI;
     using System.Collections.Generic;
+    using UnityEngine.Networking.Match;
 	[AddComponentMenu("Network/NetworkManagerHUD")]
 	[RequireComponent(typeof(NetworkManager))]
 	[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
@@ -141,7 +142,12 @@ namespace UnityEngine.Networking
 
         public void createInternetMatch()
         {
-            manager.matchMaker.CreateMatch(System.Environment.MachineName, manager.matchSize, true, "", manager.OnMatchCreate);
+            CreateMatchRequest create = new CreateMatchRequest();
+            create.name = System.Environment.MachineName;
+            create.size = 20;
+            create.advertise = true;
+            create.password = "";
+            manager.matchMaker.CreateMatch(create, manager.OnMatchCreate);
             createInternetMatchButton.gameObject.SetActive(false);
             joinButton.gameObject.SetActive(false);
             startHostButton.gameObject.SetActive(false);

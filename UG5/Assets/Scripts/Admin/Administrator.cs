@@ -10,45 +10,50 @@ public class Administrator : NetworkBehaviour {
     private Ray ray;
     private GameObject hitgo;
     public bool admin=true;
+    public bool coold = false;
     
     // Use this for initialization
     void Start ()
     {
-        admin = true;
-        //admin = GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManagerHUD>().isHost;
+        admin = GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManagerHUD>().isHost;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (admin)
+        
+        if ((CrossPlatformInputManager.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.P)) && !coold)
         {
-            if (CrossPlatformInputManager.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.P))
+            if (admin)
             {
-                RpcOpenDoor(crosshairNear.transform.position, crosshairFar.transform.position - crosshairNear.transform.position);
+                RpcLockPlayer(crosshairNear.transform.position, crosshairFar.transform.position - crosshairNear.transform.position);
             }
-            if (CrossPlatformInputManager.GetButtonDown("Fire2"))
-            {
-                RpcHideObject(crosshairNear.transform.position, crosshairFar.transform.position - crosshairNear.transform.position);
-            }
+            OpenDoor(crosshairNear.transform.position, crosshairFar.transform.position - crosshairNear.transform.position);
+            coold = true;
+            Invoke("resetCD", 3.0f);
+        }
+        if (CrossPlatformInputManager.GetButtonDown("Fire2") && !coold)
+        {
+            CmdHideObject(crosshairNear.transform.position, crosshairFar.transform.position - crosshairNear.transform.position);
+            coold = true;
+            Invoke("resetCD", 3.0f);
         }
     }
 
-    //[ClientRpc]
-    void RpcOpenDoor(Vector3 pos1, Vector3 pos2)
+    private void resetCD()
+    {
+        coold = false;
+    }
+
+    [ClientRpc]
+    void RpcLockPlayer(Vector3 pos1, Vector3 pos2)
     {
         ray.origin = pos1;
         ray.direction = pos2;
         if (Physics.Raycast(ray, out hit, 100))
         {
             hitgo = hit.transform.gameObject;
-            //hitgo.transform.SetParent(null);
-            if (hitgo.tag == "Model")
-            {
-                hitgo.SetActive(false);
-                StartCoroutine(CloseDoor(hitgo.transform));
-            }
-            else if (hitgo.tag == "Player")
+            if (hitgo.tag.Equals("Player"))
             {
                 hitgo.GetComponent<CharacterController>().enabled = false;
                 StartCoroutine(LockPlayer(hitgo.transform));
@@ -56,16 +61,31 @@ public class Administrator : NetworkBehaviour {
         }
         Debug.DrawRay(ray.origin, ray.direction * 100, Color.black, 30);
     }
-
-    //[ClientRpc]
-    void RpcHideObject(Vector3 pos1, Vector3 pos2)
+    
+    void OpenDoor(Vector3 pos1, Vector3 pos2)
     {
         ray.origin = pos1;
         ray.direction = pos2;
         if (Physics.Raycast(ray, out hit, 100))
         {
             hitgo = hit.transform.gameObject;
-            //hitgo.transform.SetParent(null);
+            if (hit.transform.parent.tag.Equals("Import"))
+            {
+                hitgo.SetActive(false);
+                StartCoroutine(CloseDoor(hitgo.transform));
+            }
+        }
+        Debug.DrawRay(ray.origin, ray.direction * 100, Color.black, 30);
+    }
+
+    [Command]
+    void CmdHideObject(Vector3 pos1, Vector3 pos2)
+    {
+        ray.origin = pos1;
+        ray.direction = pos2;
+        if (Physics.Raycast(ray, out hit, 100))
+        {
+            hitgo = hit.transform.gameObject;
             if (hitgo.tag == "Model")
             {
                 hitgo.GetComponentInChildren<MeshRenderer>().enabled = false;
@@ -78,7 +98,7 @@ public class Administrator : NetworkBehaviour {
     IEnumerator CloseDoor(Transform t)
     {
         Debug.Log("Close before");
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
         Debug.Log("Close after");
         t.gameObject.SetActive(true);
     }

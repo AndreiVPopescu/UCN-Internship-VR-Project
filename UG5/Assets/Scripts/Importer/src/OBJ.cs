@@ -63,8 +63,14 @@ public class OBJ : MonoBehaviour
         //if (fileinfo.Length > 1) Debug.Log("More than 1 obj file found.."); //what to do if there are more than 1 obj
 
         //objPath = "file:///" + Application.dataPath + "/OBJ/" + filenames;
-        objPath = "file:///" + filenames;
-        //objPath = "file:///" + objFolderPath +"/"+ filenames;
+        if (Application.isEditor)
+        {
+            objPath = "file:///" + filenames;
+        }
+        else
+        {
+            objPath = "file:///" + objFolderPath + "/" + filenames;
+        }
         Debug.Log("How it is: " + objPath);
         StartCoroutine(Load(objPath));
 
@@ -575,6 +581,7 @@ public class OBJ : MonoBehaviour
                 go.transform.parent = gameObject.transform;
                 go.AddComponent(typeof(MeshFilter));
                 go.AddComponent(typeof(MeshRenderer));
+
                 go.tag = "Model";
                 //MeshCollider collider = new MeshCollider();
                 //collider.sharedMesh = go.GetComponent<Mesh>();

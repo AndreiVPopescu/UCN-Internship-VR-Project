@@ -10,6 +10,7 @@ public class Player_NetworkSetup : NetworkBehaviour
     AudioListener audioListener;
     [SerializeField]
     Administrator admin;
+    public GameObject cam;
     public GameObject cyl;
     public GameObject bar;
     public GameObject loading;
@@ -24,6 +25,7 @@ public class Player_NetworkSetup : NetworkBehaviour
             FPSCharacterCam.enabled = true;
             audioListener.enabled = true;
             crosshair.SetActive(true);
+            cam.SetActive(true);
             admin.enabled = true;
             cyl.SetActive(false);
             bar.SetActive(false);
